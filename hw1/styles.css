@@ -1,33 +1,48 @@
 
+.title.head{
+  font-size: 50px;
+}
+
 .title{
-font-family: Georgia;
-font-weight:bold;
-text-align: center;
+  font-family: Aquino;
+  font-size: 25px;
+  font-weight:bold;
+  text-align: center;
+  }
+
+#show{
+  display: flex;
+  justify-content: center ;
 }
 
 div{
-  text-align: center;
+  border: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: flex-start ;
 }
+
+h3.title{
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+
 .beloved{
 background-color: Cornsilk; /* #FFF8DC */
+
 }
 .normal{
     background-color: HoneyDew; /* #F0FF0 */
 }
 
-img{
-  border: 10px;
-}
-
-p{
-  display: inline-block;
-}
-
 .beloved-place:hover{
   transition: 0.5s;
   opacity: 0.3;
-  box-shadow:5px 5px 5px 5px Gold ;
+  box-shadow:5px 5px 5px 5px Gold;
   transform: scale(1.2,1.2);
+  cursor: pointer;
 }
 
 .normal-place:hover{
@@ -35,4 +50,16 @@ p{
   opacity: 0.5;
   box-shadow: 5px 5px 5px 5px DarkSeaGreen;
   transform: scale(1.2,1.2);
+  cursor: pointer;
+}
+
+button{
+  width: 100px;
+  height: 50px;
+  border: 5px solid silver;    
+  border-radius: 100%;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
 }
