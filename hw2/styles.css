@@ -45,7 +45,6 @@
     display: inline-block;
   }
 
-  /* The expanding image container (positioning is needed to position the close button and the text) */
   .view {
     display: flex;
     justify-content: center ;
