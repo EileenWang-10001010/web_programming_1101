@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+    rel="stylesheet"
+    type="text/css"
+    media="screen"
+    href="styles.css"
+  />
+</head>
+<body>
+    <h3>Select an album:</h3>
+    <button onclick="toAlbum1()">Daily album <br> <img src="https://i.imgur.com/hgnv6jF.jpg" alt="lake at night" width=60px></button>
+    <button onclick="toAlbum2()">Dream land <br> <img src="https://i.imgur.com/trVsyRq.jpg" alt="lake" width=60px></button>
+    <button onclick="alert('This is an empty album ')" style="padding: 0px 0px 50px 0px">empty album <br> </button>
+      <div class="view" style="background-color:HoneyDew;">
+        <!-- display on screen -->
+        <img id="display" src="https://i.imgur.com/hgnv6jF.jpg" style="width:40%; display:flex; justify-content:center">
+      </div>
+
+      <div id="album1">
+        <h3 class="title"><em>Daily album</em></h3>
+        <div class="column">
+          <img src="https://i.imgur.com/hgnv6jF.jpg" alt="lake at night" width=250px onclick="displayPreview(this);"></div>
+        <div class="column">
+          <img src="https://i.imgur.com/jraCEZl.jpg" alt="Mountains" width=250px onclick="displayPreview(this);"></div>
+        <div class="column">
+          <img src="https://i.imgur.com/MhuFHBV.jpg" alt="Mountains" width=250px onclick="displayPreview(this);"></div>
+        <div class="column">
+          <img src="https://i.imgur.com/lgbK0SH.jpg" alt="sea" width=250px onclick="displayPreview(this);"></div>
+      </div>
+
+      <div id="album2">
+        <h3 class="title"><em>Dream land</em></h3>
+        <div class="column">
+          <img src="https://i.imgur.com/yL5BKbk.jpg" alt="butterfly" width=250px onclick="displayPreview(this);"></div>
+        <div class="column">
+          <img src="https://i.imgur.com/7ue3cRD.jpg" alt="Mountains" width=250px onclick="displayPreview(this);"></div>
+        <div class="column">
+          <img src="https://i.imgur.com/gEa6nyA.jpg" alt="Mountains" width=250px onclick="displayPreview(this);"></div>
+        <div class="column">
+          <img src="https://i.imgur.com/trVsyRq.jpg" alt="lake" width=250px onclick="displayPreview(this);"></div>
+      </div>
+
+      <div id="album3">
+
+      </div>
+
+      <script src="main.js"></script>
+</body>
+</html>

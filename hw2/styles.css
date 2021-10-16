@@ -1,0 +1,52 @@
+.selected{
+    box-shadow:5px 5px 5px 5px Gold;
+    cursor: pointer;
+  }
+
+.column {
+    float: left;
+    padding: 10px;
+    border: 10px;
+  }
+  
+  .column img {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  
+  .column img:hover {
+    transition: 0.5s;
+    opacity: 0.5;
+    box-shadow: 5px 5px 5px 5px DarkSeaGreen;
+    transform: scale(1.2,1.2);
+    cursor: pointer;
+  }
+  
+  /* Clear floats after the columns */
+  .album {
+    background-color: Cornsilk;
+    content: "";
+    display: flex;
+    clear: both;
+    visibility:visible;
+  }
+
+  .hidden{
+    display:none;
+  }
+
+  button{
+    border-color: rgb(250, 252, 251);
+    background-color: transparent;
+    cursor: pointer;
+    text-align: center;
+    font-family: Georgia;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  /* The expanding image container (positioning is needed to position the close button and the text) */
+  .view {
+    display: flex;
+    justify-content: center ;
+  }
