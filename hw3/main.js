@@ -53,6 +53,35 @@ document.querySelector(".todo-app__clean").addEventListener("mouseup", function(
     checkFooter();
 });
 
+document.querySelector(".todo-app__view-buttons").addEventListener("click", function(event){
+    
+    if(event.target.innerHTML==="Active"){
+        for(var i=0; i<numOfTodo; i++){
+            if(document.querySelectorAll("li")[i].classList.contains("switchCondition")){
+                document.querySelectorAll("li")[i].style.display="none";
+            }
+            else{
+                document.querySelectorAll("li")[i].style.display="flex";
+            }
+        }
+    }
+    else if(event.target.innerHTML==="Completed"){
+        for(var i=0; i<numOfTodo; i++){
+            if(document.querySelectorAll("li")[i].classList.contains("switchCondition")==false){
+                document.querySelectorAll("li")[i].style.display="none";
+            }
+            else{
+                document.querySelectorAll("li")[i].style.display="flex";
+            }
+        }
+    }
+    else if(event.target.innerHTML==="All"){
+        for(var i=0; i<numOfTodo; i++){
+        document.querySelectorAll("li")[i].style.display="flex";
+    }
+    }
+});
+
 function addTodoItem(){
 
     newdiv = document.createElement("div"); 
