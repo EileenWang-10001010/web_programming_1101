@@ -3,6 +3,7 @@ var numOfTodo = document.querySelectorAll("todo-app__item").length;
 var numOfDone = document.querySelectorAll("input[type=checkbox]:checked").length;
 
 checkFooter();
+clearCompleted();
 
 document.querySelector(".todo-app__input").addEventListener("keydown", function(event){
     if(event.key=="Enter"){
@@ -21,9 +22,11 @@ document.querySelector(".todo-app__input").addEventListener("keydown", function(
             }
             else{
                 event.target.parentNode.parentNode.classList.add("switchCondition");
+
                 numOfDone=numOfDone+1;
             }
             renewTotalLeft();
+            clearCompleted();
         }
 
         if(event.target.tagName=="IMG"){
@@ -35,9 +38,20 @@ document.querySelector(".todo-app__input").addEventListener("keydown", function(
             numOfTodo=numOfTodo-1;
             checkFooter();
             renewTotalLeft();
+            clearCompleted();
         }
     });
 
+document.querySelector(".todo-app__clean").addEventListener("mouseup", function(event){
+
+    while(numOfDone>0){
+        document.querySelectorAll(".switchCondition")[0].remove();
+        numOfDone=numOfDone-1;
+        numOfTodo=numOfTodo-1;
+    }
+    clearCompleted();
+    checkFooter();
+});
 
 function addTodoItem(){
 
@@ -87,3 +101,11 @@ function checkFooter(){
     }
 }
 
+function clearCompleted(){ 
+    if(numOfDone===0){ 
+        document.querySelector(".todo-app__clean").classList.add("visibility");
+    }
+    else{
+        document.querySelector(".todo-app__clean").classList.remove("visibility");
+    } 
+}
