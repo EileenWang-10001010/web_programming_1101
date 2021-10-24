@@ -1,11 +1,8 @@
-//should be renewed by function delete node
+//should be renewed by add/delete node
 var numOfTodo = document.querySelectorAll("todo-app__item").length;
-if (numOfTodo===0){
-    document.querySelector(".todo-app__footer").classList.add("visibility");
-}
-else{
-    document.querySelector(".todo-app__footer").classList.remove("visibility");
-}
+var numOfDone = document.querySelectorAll("input[type=checkbox]:checked").length;
+
+checkFooter();
 
 document.querySelector(".todo-app__input").addEventListener("keydown", function(event){
     if(event.key=="Enter"){
@@ -13,10 +10,32 @@ document.querySelector(".todo-app__input").addEventListener("keydown", function(
         numOfTodo=numOfTodo+1;
         document.querySelector(".todo-app__footer").classList.remove("visibility");
         }
+        renewTotalLeft();
 })
 
     document.querySelector("ul").addEventListener("mouseup", function(event){
-        event.target.parentNode.parentNode.classList.toggle("switchCondition");
+        if(event.target.tagName=="LABEL"){
+            if(event.target.parentNode.parentNode.classList.contains("switchCondition")){
+                event.target.parentNode.parentNode.classList.remove("switchCondition");
+                numOfDone=numOfDone-1;
+            }
+            else{
+                event.target.parentNode.parentNode.classList.add("switchCondition");
+                numOfDone=numOfDone+1;
+            }
+            renewTotalLeft();
+        }
+
+        if(event.target.tagName=="IMG"){
+            
+            if(event.target.parentNode.childNodes[0].childNodes[0].checked == true){
+                numOfDone=numOfDone-1;
+            }
+            event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+            numOfTodo=numOfTodo-1;
+            checkFooter();
+            renewTotalLeft();
+        }
     });
 
 
@@ -54,3 +73,17 @@ function addTodoItem(){
     
     document.querySelector(".todo-app__input").value="";
 }
+
+function renewTotalLeft(){
+    document.querySelector(".todo-app__total").innerHTML=numOfTodo-numOfDone+" left";
+}
+
+function checkFooter(){
+    if (numOfTodo===0){
+        document.querySelector(".todo-app__footer").classList.add("visibility");
+    }
+    else{
+        document.querySelector(".todo-app__footer").classList.remove("visibility");
+    }
+}
+
