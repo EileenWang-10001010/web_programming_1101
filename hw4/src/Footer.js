@@ -1,16 +1,19 @@
 import React from 'react';
 
 const Footer = ({toDoList,handleFilter ,handleAll,handleActive,handleCompleted})=>{
-
+    const toDo = toDoList.length;
     const hiddenFooter = toDoList.length===0? "hidden":"visible";
-
+     
     const numOfLeft=({toDoList})=>{
         let copy= toDoList.filter(task=>{return !task.complete});
         return(copy.length);
     }
 
-const numOfTodo = numOfLeft(toDoList={toDoList});
 
+const numOfTodo = numOfLeft(toDoList={toDoList});
+var Done = toDo-numOfTodo;
+
+const hiddenClear =  Done===0? "hidden":"visible";
 //const handleButton=(e)=>{
  //alert(e.target.innerHTML);
  //setButton(e.target.innerHTML);
@@ -23,10 +26,10 @@ const numOfTodo = numOfLeft(toDoList={toDoList});
                 <ul class="todo-app__view-buttons">
                     <button onClick={handleAll} >All</button>
                     <button onClick={handleActive}>Active</button>
-                    <button onClick={handleCompleted}>Completed</button>
+                    <button onClick={handleCompleted} >Completed</button>
                 </ul>
                 <div class="todo-app__clean">
-                    <button onClick={handleFilter}>Clear completed</button>
+                    <button onClick={handleFilter} style={{visibility:hiddenClear}}>Clear completed</button>
                 </div>
             </footer>
     )
