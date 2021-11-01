@@ -7,9 +7,9 @@ import Footer from './Footer';
 
 function App() {
   //initial list item
-  const data=[{ }];
 
-  const [ toDoList, setToDoList ] = useState(data);
+  const [ toDoList, setToDoList ] = useState([]);
+  const[button, setButton]=useState(toDoList);
   const [showFooter, setShowFooter]=useState(false);
 
 
@@ -29,6 +29,12 @@ function App() {
     });
     setToDoList(filtered);
      }
+  const handleCompleted=()=>{
+    let buttons = toDoList.filter(task => {
+      return task.complete;
+    });
+    setButton(buttons);
+  }
 
   const addTask = (KeyboardInput) => {
     let copy = [...toDoList];
