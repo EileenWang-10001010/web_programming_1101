@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { useState ,useEffect, useRef} from 'react';
+import React from 'react';
+import { useState , useRef} from 'react';
 import  './styles.css';
 import ToDoList from './ToDoList';
 import AddTodos from './AddTodos';
@@ -8,6 +8,7 @@ import Footer from './Footer';
 function App() {
   //initial list item
   const [ toDoList, setToDoList ] = useState([]);
+
   const id = useRef(1);
 
     const  handleX=(id)=> {
@@ -22,8 +23,6 @@ function App() {
     setToDoList(mapped);
   }
 
-
-
   //when you click on the "clear completed"=> filter out the completed
   const handleFilter = () => {
     let filtered = toDoList.filter(task => {
@@ -32,10 +31,34 @@ function App() {
     setToDoList(filtered);
      }
 
+
+     const handleAll=()=>{
+      let mapped = toDoList.map(task => {
+        return task.complete ? { ...task, visibility: "visible",display: "flex" } : { ...task, visibility: "visible",display: "flex" };
+      });
+      setToDoList(mapped);
+     }
+
+     const handleActive=()=>{
+      let mapped = toDoList.map(task => {
+        return task.complete ? { ...task, display: "none",visibility: "visible" } : { ...task, visibility: "visible",display: "flex" };
+      });
+      setToDoList(mapped);
+     }
+
+     const handleCompleted=()=>{
+      let mapped = toDoList.map(task => {
+        return task.complete ? { ...task, visibility: "visible",display: "flex" } : { ...task, display: "none",visibility: "visible" };
+      });
+      setToDoList(mapped);
+     }
+
   const addTask = (KeyboardInput) => {
     setToDoList([...toDoList,{id: id.current,
                 task: KeyboardInput, 
-                complete: false} ]); 
+                complete: false,
+                visibility:"visible",
+                display:"flex"} ]); 
     id.current++;
   
     //let copy = [...toDoList];
@@ -43,8 +66,6 @@ function App() {
     //setToDoList(copy);
   }
 
-  
- 
   return (
 
     <div id="root" class="todo-app__root">
@@ -57,10 +78,21 @@ function App() {
                
                 <ul class="todo-app__list" id="todo-list">
                 <AddTodos addTask={addTask} />
-                <ToDoList toDoList={toDoList} handleToggle={handleToggle} handleFilter={handleFilter} handleX={handleX}/>
+                <ToDoList toDoList={toDoList} 
+                handleToggle={handleToggle} 
+                handleFilter={handleFilter} 
+                handleX={handleX} 
+                
+                />
                 </ul>
             </section>
-            <Footer toDoList={toDoList} handleFilter={handleFilter} setToDoList={setToDoList} />
+            <Footer toDoList={toDoList} 
+            handleFilter={handleFilter} 
+            
+            handleAll={handleAll}
+            handleActive={handleActive}
+            handleCompleted={handleCompleted}
+             />
             </div>
   );
 }

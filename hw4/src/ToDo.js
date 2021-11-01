@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React  from 'react';
 import x from './img/x.png';
 
 const ToDo = ({todo, handleToggle,handleX}) => {
@@ -27,12 +27,14 @@ const ToDo = ({todo, handleToggle,handleX}) => {
     //    handleX(e.target.parentNode.childNodes[0].id);
     //}
 
+
+
     const  complete = todo.complete ? "todo strike" : "todo";
     const background = todo.complete ? "#26ca299b" : "rgba(99, 99, 99, 0.698)";
 
     return (
         
-        <li className="todo-app__item" style = {{display: 'flex'}}>
+        <li className="todo-app__item" style={{visibility:todo.visibility},{display:todo.display}}>
             <div className="todo-app__checkbox" id={todo.id}  >
              <input className="input" type="checkbox"  defaultChecked={false}></input>
              <label htmlFor={todo.id}  onClick={()=>{handleToggle(todo.id)}} style={{backgroundColor:background}}></label>

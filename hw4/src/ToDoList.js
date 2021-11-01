@@ -1,29 +1,12 @@
-import React ,{useState} from 'react';
+import React from 'react';
 import ToDo from './ToDo';
 
    const ToDoList = ({toDoList, handleToggle, handleFilter,handleX}) => {
-    const [visible, setvisible ] = useState(true);
-
-    const handleVisibility=({handleVisibles})=>{
-        alert({handleVisibles});
-
-        switch ({handleVisibles}){
-            case "All":
-                setvisible(true);
-                break;
-            case "Active":
-                toDoList.complete? setvisible(false):setvisible(true);
-                break;
-            case "Completed":
-                toDoList.complete? setvisible(true):setvisible(false);
-                break;
-        }
-    }
-
 
     return (
-        <div>
+        <div >
             {toDoList.map(todo => {
+
                 return (
        <ToDo todo={todo} 
        handleToggle={handleToggle} 
