@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { useState } from 'react';
+import { useState ,useEffect, useRef} from 'react';
 import  './styles.css';
 import ToDoList from './ToDoList';
 import AddTodos from './AddTodos';
@@ -7,11 +7,12 @@ import Footer from './Footer';
 
 function App() {
   //initial list item
-
   const [ toDoList, setToDoList ] = useState([]);
-  const[button, setButton]=useState(toDoList);
-  const [showFooter, setShowFooter]=useState(false);
+  const id = useRef(1);
 
+    const  handleX=(id)=> {
+      setToDoList(toDoList.filter(task => task.id !== Number(id)));
+    }
 
   // when you click on the task button =>  switch to comleted state or not
   const handleToggle = (id) => {
@@ -21,32 +22,28 @@ function App() {
     setToDoList(mapped);
   }
 
-  //when you click on the "clear completed"=> filter out the completed
 
+
+  //when you click on the "clear completed"=> filter out the completed
   const handleFilter = () => {
     let filtered = toDoList.filter(task => {
       return !task.complete;
     });
     setToDoList(filtered);
      }
-  const handleCompleted=()=>{
-    let buttons = toDoList.filter(task => {
-      return task.complete;
-    });
-    setButton(buttons);
-  }
 
   const addTask = (KeyboardInput) => {
-    let copy = [...toDoList];
-    copy = [...copy, { id: toDoList.length + 1, task: KeyboardInput, complete: false }];
-    setToDoList(copy);
+    setToDoList([...toDoList,{id: id.current,
+                task: KeyboardInput, 
+                complete: false} ]); 
+    id.current++;
+  
+    //let copy = [...toDoList];
+    //copy = [...copy, { id: toDoList.length + 1, task: KeyboardInput, complete: false }];
+    //setToDoList(copy);
   }
 
-  const numOfLeft=()=>{
-    let copy= toDoList.map(task=>{return task.complete});
-    //alert(copy.length);
-    return(copy.length);
-}
+  
  
   return (
 
@@ -60,10 +57,10 @@ function App() {
                
                 <ul class="todo-app__list" id="todo-list">
                 <AddTodos addTask={addTask} />
-                <ToDoList toDoList={toDoList} handleToggle={handleToggle} handleFilter={handleFilter} />
+                <ToDoList toDoList={toDoList} handleToggle={handleToggle} handleFilter={handleFilter} handleX={handleX}/>
                 </ul>
             </section>
-            <Footer toDoList={toDoList} handleFilter={handleFilter} />
+            <Footer toDoList={toDoList} handleFilter={handleFilter} setToDoList={setToDoList} />
             </div>
   );
 }

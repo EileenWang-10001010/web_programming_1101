@@ -1,7 +1,7 @@
 import React ,{useState} from 'react';
 import ToDo from './ToDo';
 
-   const ToDoList = ({toDoList, handleToggle, handleFilter}) => {
+   const ToDoList = ({toDoList, handleToggle, handleFilter,handleX}) => {
     const [visible, setvisible ] = useState(true);
 
     const handleVisibility=({handleVisibles})=>{
@@ -28,7 +28,7 @@ import ToDo from './ToDo';
        <ToDo todo={todo} 
        handleToggle={handleToggle} 
        handleFilter={handleFilter} 
-       
+       handleX={handleX}
        />
        )
             })}
