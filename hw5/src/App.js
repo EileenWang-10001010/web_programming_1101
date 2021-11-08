@@ -9,12 +9,14 @@ const toLocaleString = (num) =>
 
 const removeSpaces = (num) => num.toString().replace(/\s/g, "");
 
+let memory = Number(0);
+
 const btnValues = [
   ["C","del",  "mc", "mr","/"],
-  [7, 8, 9, "+-","X"],
+  [7, 8, 9, "m+","X"],
   [4, 5, 6,"%", "-"],
-  [1, 2, 3,"sci", "+"],
-  [0, ".","log", "="],
+  [1, 2, 3,"+-", "+"],
+  [0, ".","sci", "="],
 ];
 
 const assignClass=(i)=>{
@@ -35,11 +37,81 @@ const App = () => {
     sign: "", //operator sign
     value: 0, //entered number
     result: 0, //calculated value
+    sci: 0, //scientific number
   });
+
+  let calculate0 = {
+    sign: "", //operator sign
+    value: 0, //entered number
+    result: 0, //calculated value
+    sci: 0, //scientific number
+  };
+
+  const deletClickHandler =() =>{
+
+    setCalculate(calculate0);
+
+  }
+
+  const mcClickHandler =() =>{
+    memory=Number(0);
+  }
+
+  const mrClickHandler =() =>{
+
+    if (removeSpaces(calculate.value).length < 16) {
+      setCalculate({
+        ...calculate,
+        value:
+        /* 0 is the initialized value */
+        calculate.value === 0 && Number(memory) === "0"? "0":
+         /* the  value must be a number */
+         removeSpaces(calculate.value) % 1 === 0? toLocaleString(Number(removeSpaces(calculate.value + Number(memory)))):toLocaleString(calculate.value + Number(memory)),
+        
+        result: !calculate.sign ? 0 : calculate.result,
+      });
+      
+    }
+    else{
+      setCalculate({
+        ...calculate,
+        value: "overfloat",
+      })
+    }
+  }
+
+  const sciClickHandler =() =>{
+    
+    let power =0;
+    let valueCopy = calculate.value?calculate.value:calculate.result;
+
+    if(valueCopy>10){
+      while(valueCopy>10){
+        valueCopy=valueCopy/10;
+        power=power+1;
+      }
+    }
+    else if(valueCopy<1){
+      while(valueCopy<1){
+        valueCopy=valueCopy*10;
+        power=power-1;
+      }
+    }
+    alert(valueCopy+"e"+power);
+    power=0;
+    valueCopy=0;
+
+  }
+
+  const mPlusClickHandler =() =>{
+    memory += Number(calculate.value);
+  }
 
   const numClickHandler = (e) => {
     e.preventDefault();
     const input = e.target.innerHTML;
+
+    let calculate0 = JSON.parse(JSON.stringify(calculate));
 
     if (removeSpaces(calculate.value).length < 16) {
       setCalculate({
@@ -52,6 +124,12 @@ const App = () => {
         
         result: !calculate.sign ? 0 : calculate.result,
       });
+    }
+    else{
+      setCalculate({
+        ...calculate,
+        value: "overfloat",
+      })
     }
   };
 
@@ -93,7 +171,7 @@ const App = () => {
         ...calculate,
         result:
         calculate.value === "0" && calculate.sign === "/"
-            ? "Can't divide with 0"
+            ? "Divided by 0"
             : toLocaleString(math(Number(removeSpaces(calculate.result)), Number(removeSpaces(calculate.value)), calculate.sign)),
         sign: "",
         value: 0,
@@ -104,8 +182,8 @@ const App = () => {
   const invertClickHandler = () => {
     setCalculate({
       ...calculate,
-      num: calculate.value ? toLocaleString(removeSpaces(calculate.value) * -1) : 0,
-      res: calculate.result ? toLocaleString(removeSpaces(calculate.result) * -1) : 0,
+      value: calculate.value ? toLocaleString(removeSpaces(calculate.value) * (-1)) : 0,
+      result: calculate.result ? toLocaleString(removeSpaces(calculate.result) * (-1)) : 0,
       sign: "",
     });
   };
@@ -116,8 +194,8 @@ const App = () => {
   
     setCalculate({
       ...calculate,
-      value: (value /= Math.pow(100, 1)),
-      result: (result /= Math.pow(100, 1)),
+      value: (value = value/ Math.pow(100, 1)),
+      result: (result = result/ Math.pow(100, 1)),
       sign: "",
     });
   };
@@ -128,9 +206,9 @@ const App = () => {
       sign: "",
       value: 0,
       result: 0,
+      sci:0,  
     });
   };
-
 
   return (
     <Wrapper>
@@ -142,7 +220,6 @@ const App = () => {
               <Button
                 key={i}
                 className={assignClass(i)}
-                
                 value={btn}
                 onClick={
                   btn === "C"? resetClickHandler : 
@@ -150,7 +227,12 @@ const App = () => {
                   btn === "%"? percentClickHandler:
                   btn === "="? equalsClickHandler:
                   btn === "/" || btn === "X" || btn === "-" || btn === "+"?signClickHandler:
-                  btn === "."? commaClickHandler:numClickHandler}
+                  btn === "."? commaClickHandler:
+                  btn === "del"? deletClickHandler:
+                  btn === "mc"? mcClickHandler:
+                  btn ==="mr"? mrClickHandler:
+                  btn ==="sci"? sciClickHandler:
+                  btn ==="m+"? mPlusClickHandler:numClickHandler}
               />
             );
           })}
