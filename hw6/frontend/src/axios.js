@@ -1,14 +1,14 @@
 import axios from 'axios';
-const instance = axios.create({baseUrl: 'http://localhost:4000/api/guess'})
+const instance = axios.create({baseURL: 'http://localhost:4000/api/guess'})
 
 const startGame = async ()=>{
-    const {data:{msg}} = await instance.post('http://localhost:4000/api/guess/start')
+    const {data:{msg}} = await instance.post('/start')
     //msg = "The game has started".
     return msg
 }
 const guess = async (number) =>{
     try{
-        const {data:{msg}} = await instance.get('http://localhost:4000/api/guess/guess',{params: {number}})
+        const {data:{msg}} = await instance.get('/guess',{params: {number}})
         //data: {msg: 'Equal/Smaller/Bigger'}
         
     return msg
@@ -19,7 +19,7 @@ const guess = async (number) =>{
      }
 }
 const restart = async ()=>{
-    const {data:{msg}} = await instance.post('http://localhost:4000/api/guess/restart')
+    const {data:{msg}} = await instance.post('/restart')
     //msg = "The game has restarted."
     return msg
 }
