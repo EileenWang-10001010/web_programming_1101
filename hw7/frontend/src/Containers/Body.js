@@ -77,7 +77,7 @@ const Body = () => {
     });
 
     if (!messages) addErrorMessage(message);
-    else addRegularMessage(...messages);
+     else  addRegularMessage(...message);
   };
 
   return (

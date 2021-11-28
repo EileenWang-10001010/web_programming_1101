@@ -60,16 +60,66 @@ const saveUser = async (name,subject,score,res) => {
         catch (e) { throw new Error("Database deletion failed"); }
     };
 
+const searchQuery = async (queryType,queryString,res) => {
+
+        if(queryType==="name"){
+            const existing = await User.find({ name: queryString});
+            let i =Object.entries(existing).length;
+            //console.log(existing);
+
+            if(i===0){
+                res.json({message: `${queryType}(${queryString}) not found!` });
+            }
+            else{
+                let msg =[];
+                let singleMsg =``;
+                //console.log(existing,i);
+                 for(var j=0;j<i;j++){
+                     singleMsg = `(${existing[j].name},${existing[j].subject},${existing[j].score})`
+                    //  console.log(singleMsg);
+                    msg=[...msg,singleMsg] ;
+                 }
+                 //console.log(msg);
+                 res.json({messages:"query", message:msg});
+            }
+
+        }
+        else{
+            const existing = await User.find({ subject: queryString});
+            let i =Object.entries(existing).length;
+            //console.log(existing);
+            if(i===0){
+                res.json({message: `${queryType}(${queryString}) not found!` });
+            }
+            else{
+                let msg =[];
+                let singleMsg =``;
+                //console.log(existing,i);
+
+                 for(var j=0;j<i;j++){
+                     singleMsg = `(${existing[j].name},${existing[j].subject},${existing[j].score})`
+                     //console.log(singleMsg);
+                    msg=[...msg,singleMsg] ;
+                     
+                 }
+                 //console.log(msg);
+                 res.json({messages:"query", message:msg});
+            
+        }
+}}
+
 
 router.post('/create-card',(req,res)=>{
     const {name,subject,score} = req.body;
     saveUser(name,subject,score,res);
 })
 
-router.get('/api/query-cards',(req,res)=>{
+router.get('/query-cards',(req,res)=>{
+    const queryType=req.query.type;
+    const queryString=req.query.queryString;
+    searchQuery(queryType,queryString,res);
 
-    res.json({msg: `Name (Ric) not found!`})
-})
+    })
 
 router.delete('/clear-db',(_,res)=>{
     deleteDB();
