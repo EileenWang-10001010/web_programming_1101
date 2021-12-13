@@ -58,6 +58,7 @@ function App() {
           body={body}
           setBody={setBody}
           bodyRef={bodyRef}
+          displayStatus={displayStatus}
         />
       ) : (
         <SignIn me={me} setMe={setMe} setSignedIn={setSignedIn} displayStatus={displayStatus}/>

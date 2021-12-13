@@ -67,11 +67,9 @@ db.once('open', () => {
             break;}
 
             case 'clear':{
-              console.log("interpret");
               
               Message.deleteMany({},()=>{
-                sendData(['cleared']);
-                sendStatus({type:'info', msg: 'Message cache cleared.'}); //? ,ws
+                broadcastMessage(['cleared'],{type:'info', msg: 'Message cache cleared.'});
               })
               break;
             }

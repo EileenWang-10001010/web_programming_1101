@@ -10,11 +10,7 @@ const ChatRoom = (props)=>{
         <>
           <Title>
             <h1>{props.me}'s Chat Room</h1>
-            <Button type="primary" danger onClick={()=>{
-              //props.clearMessages;
-              console.log(props.clearMessages)}
-              
-            }>
+            <Button type="primary" danger onClick={props.clearMessages}>
               Clear
             </Button>
           </Title>
