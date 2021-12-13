@@ -4,7 +4,7 @@ import express from 'express';
 import dotenv from 'dotenv-defaults';
 import mongoose from 'mongoose';
 import Message from './models/message';
-import {sendData,sendStatus} from './wssConnect'; 
+import {sendData,sendStatus,initData} from './wssConnect'; 
 
 dotenv.config();
 
@@ -35,16 +35,19 @@ const broadcastMessage =(data,status)=>{
 db.once('open', () => {
     console.log('MongoDB connected!')
 
-    wss.on('connection', (ws) => {
+    wss.on('connection',  (ws) => {
+
+      
+      initData(ws);
+      
         ws.onmessage = async (byteString) => {
+          
           const { data } = byteString
           const [task, payload] = JSON.parse(data)
           console.log([task, payload]);
+
           switch (task) {
-            case 'init':{
-              //
-              break;
-            }
+
             case 'input': {
               const { name, body } = payload
               const message
@@ -64,6 +67,8 @@ db.once('open', () => {
             break;}
 
             case 'clear':{
+              console.log("interpret");
+              
               Message.deleteMany({},()=>{
                 sendData(['cleared']);
                 sendStatus({type:'info', msg: 'Message cache cleared.'}); //? ,ws

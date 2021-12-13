@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 const client = new WebSocket('ws://localhost:4000');
 
@@ -5,6 +6,9 @@ const sendData = async (data) => {
   await client.send(JSON.stringify(data));
 }
 
+
+
+//define useChat hook
 const useChat = () => {
   const [messages, setMessages] = useState([]);
   const [status, setStatus] = useState({});
@@ -16,9 +20,13 @@ const useChat = () => {
 
   client.onmessage = (byteString)=>{
     const {data}=byteString;
+    //console.log(byteString);
     const [task,payload]=JSON.parse(data);
+    
+
     switch (task) {
       case "init":{
+        console.log(payload);
         setMessages(()=>payload);
         break;
       }
@@ -33,8 +41,9 @@ const useChat = () => {
         }
       default:break;
       }
-
       }
+
+  
     return{ 
       status,
       messages,
