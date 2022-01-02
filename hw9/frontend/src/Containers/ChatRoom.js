@@ -127,9 +127,9 @@ const ChatRoom = ({me, displayStatus}) =>{
                 message: messageInput, 
             }});
             
-            setMessageInput("");
+            
         }}>
-
+            
         </Input.Search>
         
         </>

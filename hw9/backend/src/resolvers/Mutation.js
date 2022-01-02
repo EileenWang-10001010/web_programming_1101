@@ -20,7 +20,9 @@ const Mutation = {
     const chatBoxName = makeName(name1, name2);
     let chatBox = 
       await checkChatBox(db, chatBoxName, "createChatBox");
-    if (!chatBox) chatBox = await newChatBox(db, chatBoxName);
+    if (!chatBox) {
+      chatBox = await newChatBox(db, chatBoxName);
+      };
 
     return chatBox;
   },
