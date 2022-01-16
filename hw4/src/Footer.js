@@ -1,17 +1,19 @@
 import React from 'react';
 
 const Footer = ({toDoList,handleFilter ,handleAll,handleActive,handleCompleted})=>{
-    const toDo = toDoList.length;
+    //const toDo = toDoList.length;
     const hiddenFooter = toDoList.length===0? "hidden":"visible";
-     
+    
+    const toDoCopy = JSON.parse(JSON.stringify(toDoList));
+    
     const numOfLeft=({toDoList})=>{
         let copy= toDoList.filter(task=>{return !task.complete});
         return(copy.length);
     }
 
-
+//alert(toDoCopy.length);
 const numOfTodo = numOfLeft(toDoList={toDoList});
-var Done = toDo-numOfTodo;
+var Done = toDoCopy.length-numOfTodo;
 
 const hiddenClear =  Done===0? "hidden":"visible";
 //const handleButton=(e)=>{

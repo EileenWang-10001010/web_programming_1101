@@ -26,7 +26,7 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
     useEffect(() => {
         // Calling the function
         freshBoard();
-    }, [board,nonMineCount,mineLocations,gameOver,remainFlagNum,win]);
+    }, []);
 
     // Creating a board
     const freshBoard = () => {
@@ -76,10 +76,11 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
             <div className = 'boardWrapper' >
             <div className = 'boardContainer'>
             <Dashboard remainFlagNum={remainFlagNum}  gameOver={gameOver} />
+            
             {board.map((e)=>(
                  
                 <div id={'row'+ '0'} style = {{display: 'flex'}}>
-                    good
+                   console.log(e)
                     </div>))}
             
             </div>

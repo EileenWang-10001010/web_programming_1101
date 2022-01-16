@@ -22,7 +22,7 @@ const Subscription = {
   taskDeleted: {
     subscribe: (parent, {id}, { pubSub }) => {
       
-      return pubSub.asyncIterator(`TASK_DELETED ${id}`);
+      return pubSub.asyncIterator(`TASK_DELETED`);
     },
   },
 };

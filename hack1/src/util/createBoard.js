@@ -80,16 +80,17 @@ export default (boardSize, mineNum,{setBoard}) => {
           m =>
             (m.x === xLeft || m.x === xRight || m.x === mineNum.x) && m.y === levelDown
         );
-      
+      ;
         return [...sameLevel, ...upLevel, ...downLevel];
       };
 
       const getCountOfNeighborsWithBombs = board => {
         const map = board.map(mine => {
-          const neighborArray = getNeighbors(board, mineNum);
+          const neighborArray = getNeighbors(board, mine);
           const neighbors = neighborArray.filter(neighbor => neighbor.value==='💣').length;
-      
+          console.log({ ...mine, value : neighbors });
           return { ...mine, value : neighbors };
+          
         });
       
         return map;
@@ -98,6 +99,7 @@ export default (boardSize, mineNum,{setBoard}) => {
       setBoard(getCountOfNeighborsWithBombs(board));
 
       //printBoard()
+      {console.log(board.length)}
 
     return { board, mineLocations };
 };

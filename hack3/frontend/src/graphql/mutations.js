@@ -17,7 +17,7 @@ export const UPDATE_TASK_MUTATION = gql`
 // export const CREATE_TASK_MUTATION = gql`
 // `;
 export const CREATE_TASK_MUTATION = gql`
-mutation createTask($id: String!, $title: String!, $status: Status!, $content: String!, $dueDate: Date!){
+mutation CreateTask($id: ID!, $title: String!, $status: Status!, $content: String!, $dueDate: Date!){
   createTask(input: {id: $id title: $title status: $status content: $content dueDate: $dueDate}){
 id
 title

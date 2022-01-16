@@ -80,7 +80,7 @@ export default function Dashboard() {
   useEffect(() => {
     subscribeToMore({
       document: TASK_DELETED_SUBSCRIPTION,
-      //variables:{ id: data.task.id },
+      //variables:{ id: data.tasks },
       updateQuery: (prev, { subscriptionData }) => {
         
         if (!subscriptionData.data) return prev;
